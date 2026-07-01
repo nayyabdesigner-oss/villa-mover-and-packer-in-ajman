@@ -156,18 +156,46 @@
         .login-card h2 {
             text-align: center;
             color: #ffffff;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 36px;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff, #c4b5fd);
+            background: linear-gradient(135deg, #a78bfa, #6a5af9, #a259ff, #e879f9);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            text-shadow: 0 0 30px rgba(162, 89, 255, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .login-card .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 36px;
+            letter-spacing: 0.5px;
         }
 
         .input-group {
             margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .input-group input {
@@ -257,12 +285,15 @@
     <!-- Login Card -->
     <div class="login-card">
         <h2>Welcome Back</h2>
+        <p class="subtitle">Sign in to continue your journey</p>
         <form id="login-form">
             <div class="input-group">
-                <input type="email" placeholder="Email" required>
+                <label>Email</label>
+                <input type="email" placeholder="you@example.com" required>
             </div>
             <div class="input-group">
-                <input type="password" placeholder="Password" required>
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password" required>
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
