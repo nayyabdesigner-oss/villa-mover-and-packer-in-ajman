@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Move | Villa Movers & Packers Ajman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        'primary-dark': '#1e3a8a',
+                        'primary-light': '#3b82f6',
+                        accent: '#0ea5e9',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-truck-moving text-primary text-2xl mr-2"></i>
+                    <span class="text-xl font-bold text-primary">Villa Movers Ajman</span>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition">Home</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary transition">Pricing Calculator</a>
+                    <a href="booking.html" class="text-primary font-semibold border-b-2 border-primary pb-1">Book a Move</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-primary transition">Contact Us</a>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="index.html" class="block py-2 text-gray-600 hover:text-primary">Home</a>
+                <a href="pricing.html" class="block py-2 text-gray-600 hover:text-primary">Pricing Calculator</a>
+                <a href="booking.html" class="block py-2 text-primary font-semibold">Book a Move</a>
+                <a href="contact.html" class="block py-2 text-gray-600 hover:text-primary">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-r from-primary to-accent text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl lg:text-4xl font-bold mb-3">Book Your Move</h1>
+            <p class="text-blue-100 text-lg">Fill in the details and we'll get back to you within 2 hours</p>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section class="py-12 lg:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">Booking Details</h2>
+                        <form id="booking-form" class="space-y-5">
+                            <!-- Personal Info -->
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name *</label>
+                                    <input type="text" id="name" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="Ahmed Al Maktoum">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number *</label>
+                                    <input type="tel" id="phone" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="+971 50 123 4567">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address *</label>
+                                <input type="email" id="email" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="your@email.com">
+                            </div>
+
+                            <!-- Move Details -->
+                            <div class="border-t pt-5 mt-5">
+                                <h3 class="font-semibold text-gray-800 mb-4">Move Details</h3>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Pickup Address *</label>
+                                <input type="text" id="pickup" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="Villa 12, Al Rashidiya, Ajman">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Delivery Address *</label>
+                                <input type="text" id="delivery" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="Villa 45, Al Nuaimiya, Ajman">
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Preferred Date *</label>
+                                    <input type="date" id="move-date" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Time Slot *</label>
+                                    <select id="time-slot" required class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                                        <option value="morning">Morning (8:00 - 12:00)</option>
+                                        <option value="afternoon">Afternoon (12:00 - 16:00)</option>
+                                        <option value="evening">Evening (16:00 - 20:00)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Villa Size</label>
+                                    <select id="villa-size" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                                        <option value="studio">Studio</option>
+                                        <option value="1br">1 Bedroom</option>
+                                        <option value="2br">2 Bedrooms</option>
+                                        <option value="3br">3 Bedrooms</option>
+                                        <option value="4br">4 Bedrooms</option>
+                                        <option value="5br+">5+ Bedrooms</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Service Type</label>
+                                    <select id="service-type" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                                        <option value="local_move">Local Move</option>
+                                        <option value="long_distance">Long Distance</option>
+                                        <option value="packing_only">Packing Only</option>
+                                        <option value="full_service">Full Service</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Special Instructions</label>
+                                <textarea id="notes" rows="3" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition" placeholder="Any special items, fragile belongings, or requirements..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-primary text-white font-semibold py-4 rounded-lg hover:bg-primary-dark transition text-lg">
+                                <i class="fas fa-calendar-check mr-2"></i> Submit Booking Request
+                            </button>
+                        </form>
+
+                        <!-- Success Message -->
+                        <div id="success-message" class="hidden mt-6 bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+                            <i class="fas fa-check-circle text-green-500 text-4xl mb-3"></i>
+                            <h3 class="text-lg font-bold text-green-800 mb-2">Booking Request Submitted!</h3>
+                            <p class="text-green-700">We'll contact you within 2 hours to confirm your booking. Check your email for details.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                        <h3 class="font-bold text-gray-900 mb-4">
+                            <i class="fas fa-info-circle text-primary mr-2"></i>Booking Info
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-2"></i>
+                                <span>Book at least 24 hours in advance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-2"></i>
+                                <span>Free cancellation up to 12 hours before</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-2"></i>
+                                <span>No upfront payment required</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-2"></i>
+                                <span>Insurance included for all moves</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                        <h3 class="font-bold text-gray-900 mb-4">
+                            <i class="fas fa-phone text-primary mr-2"></i>Need Help?
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-3">Call us directly for immediate assistance:</p>
+                        <a href="tel:+971501234567" class="text-primary font-bold text-lg hover:text-primary-dark">
+                            +971 50 123 4567
+                        </a>
+                        <p class="text-xs text-gray-500 mt-2">Available 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-truck-moving text-primary-light text-xl mr-2"></i>
+                        <span class="text-white font-bold text-lg">Villa Movers Ajman</span>
+                    </div>
+                    <p class="text-sm">Professional villa moving and packing services in Ajman, UAE.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                        <li><a href="pricing.html" class="hover:text-white transition">Pricing Calculator</a></li>
+                        <li><a href="booking.html" class="hover:text-white transition">Book a Move</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fas fa-map-marker-alt mr-2 text-primary-light"></i>Al Rashidiya, Ajman, UAE</li>
+                        <li><i class="fas fa-phone mr-2 text-primary-light"></i>+971 50 123 4567</li>
+                        <li><i class="fas fa-envelope mr-2 text-primary-light"></i>info@villamoversajman.ae</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2024 Villa Movers & Packers Ajman. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('move-date').min = tomorrow.toISOString().split('T')[0];
+
+        // Form submission
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.classList.add('hidden');
+            document.getElementById('success-message').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

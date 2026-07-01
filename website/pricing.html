@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Calculator | Villa Movers & Packers Ajman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        'primary-dark': '#1e3a8a',
+                        'primary-light': '#3b82f6',
+                        accent: '#0ea5e9',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-truck-moving text-primary text-2xl mr-2"></i>
+                    <span class="text-xl font-bold text-primary">Villa Movers Ajman</span>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition">Home</a>
+                    <a href="pricing.html" class="text-primary font-semibold border-b-2 border-primary pb-1">Pricing Calculator</a>
+                    <a href="booking.html" class="text-gray-600 hover:text-primary transition">Book a Move</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-primary transition">Contact Us</a>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="index.html" class="block py-2 text-gray-600 hover:text-primary">Home</a>
+                <a href="pricing.html" class="block py-2 text-primary font-semibold">Pricing Calculator</a>
+                <a href="booking.html" class="block py-2 text-gray-600 hover:text-primary">Book a Move</a>
+                <a href="contact.html" class="block py-2 text-gray-600 hover:text-primary">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-r from-primary to-accent text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl lg:text-4xl font-bold mb-3">Pricing Calculator</h1>
+            <p class="text-blue-100 text-lg">Get an instant estimate for your villa move</p>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="py-12 lg:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                <div class="p-8 lg:p-10">
+                    <form id="pricing-form" class="space-y-6">
+                        <!-- Villa Size -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-home mr-1 text-primary"></i> Villa Size
+                            </label>
+                            <select id="villa-size" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                                <option value="studio">Studio</option>
+                                <option value="1br">1 Bedroom</option>
+                                <option value="2br" selected>2 Bedrooms</option>
+                                <option value="3br">3 Bedrooms</option>
+                                <option value="4br">4 Bedrooms</option>
+                                <option value="5br+">5+ Bedrooms</option>
+                            </select>
+                        </div>
+
+                        <!-- Service Type -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-concierge-bell mr-1 text-primary"></i> Service Type
+                            </label>
+                            <select id="service-type" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                                <option value="local_move">Local Move</option>
+                                <option value="long_distance">Long Distance</option>
+                                <option value="packing_only">Packing Only</option>
+                                <option value="full_service">Full Service (Packing + Moving)</option>
+                            </select>
+                        </div>
+
+                        <!-- Distance -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-route mr-1 text-primary"></i> Distance (km): <span id="distance-value" class="text-primary">15</span> km
+                            </label>
+                            <input type="range" id="distance" min="1" max="200" value="15" class="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer accent-primary">
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>1 km</span>
+                                <span>200 km</span>
+                            </div>
+                        </div>
+
+                        <!-- Floor Level -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <i class="fas fa-building mr-1 text-primary"></i> Floor Level
+                                </label>
+                                <input type="number" id="floor" min="0" max="50" value="0" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                            </div>
+                            <div class="flex items-end pb-3">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" id="has-elevator" checked class="w-5 h-5 text-primary rounded focus:ring-primary border-gray-300">
+                                    <span class="ml-2 text-sm font-medium text-gray-700">Has Elevator</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Fragile Items -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-wine-glass mr-1 text-primary"></i> Number of Fragile Items
+                            </label>
+                            <input type="number" id="fragile-items" min="0" max="50" value="0" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition">
+                        </div>
+
+                        <!-- Discount Options -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="flex items-center">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" id="returning-customer" class="w-5 h-5 text-primary rounded focus:ring-primary border-gray-300">
+                                    <span class="ml-2 text-sm font-medium text-gray-700">Returning Customer (10% off)</span>
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Promo Code</label>
+                                <input type="text" id="promo-code" placeholder="e.g. AJMAN20" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary transition uppercase">
+                            </div>
+                        </div>
+
+                        <!-- Calculate Button -->
+                        <button type="submit" class="w-full bg-primary text-white font-semibold py-4 rounded-lg hover:bg-primary-dark transition text-lg">
+                            <i class="fas fa-calculator mr-2"></i> Calculate Price
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="hidden bg-gray-50 border-t border-gray-200 p-8 lg:p-10">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">
+                        <i class="fas fa-receipt mr-2 text-primary"></i> Price Breakdown
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-gray-600">Base Cost</span>
+                            <span id="res-base" class="font-semibold">AED 0</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-gray-600">Service Multiplier</span>
+                            <span id="res-multiplier" class="font-semibold">x1.0</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-gray-600">Distance Surcharge</span>
+                            <span id="res-distance" class="font-semibold">AED 0</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-gray-600">Floor Surcharge</span>
+                            <span id="res-floor" class="font-semibold">AED 0</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-gray-600">Fragile Items Fee</span>
+                            <span id="res-fragile" class="font-semibold">AED 0</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 text-green-600">
+                            <span>Discount</span>
+                            <span id="res-discount" class="font-semibold">- AED 0</span>
+                        </div>
+                        <div class="border-t border-gray-300 pt-4 mt-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold text-gray-900">Total Estimate</span>
+                                <span id="res-total" class="text-2xl font-bold text-primary">AED 0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <p class="text-sm text-blue-800">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            This is an estimate. Final price may vary based on actual conditions. 
+                            <a href="booking.html" class="underline font-semibold">Book now</a> to lock in your rate.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-truck-moving text-primary-light text-xl mr-2"></i>
+                        <span class="text-white font-bold text-lg">Villa Movers Ajman</span>
+                    </div>
+                    <p class="text-sm">Professional villa moving and packing services in Ajman, UAE.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                        <li><a href="pricing.html" class="hover:text-white transition">Pricing Calculator</a></li>
+                        <li><a href="booking.html" class="hover:text-white transition">Book a Move</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fas fa-map-marker-alt mr-2 text-primary-light"></i>Al Rashidiya, Ajman, UAE</li>
+                        <li><i class="fas fa-phone mr-2 text-primary-light"></i>+971 50 123 4567</li>
+                        <li><i class="fas fa-envelope mr-2 text-primary-light"></i>info@villamoversajman.ae</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2024 Villa Movers & Packers Ajman. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Pricing logic - mirrors Python estimate_cost function
+        const BASE_RATES = {
+            'studio': 500, '1br': 800, '2br': 1200,
+            '3br': 1800, '4br': 2500, '5br+': 3500
+        };
+        const SERVICE_MULTIPLIERS = {
+            'local_move': 1.0, 'long_distance': 2.5,
+            'packing_only': 0.6, 'full_service': 1.8
+        };
+
+        function calculateFloorSurcharge(floor, hasElevator) {
+            if (floor <= 0) return 0;
+            return hasElevator ? floor * 25 : floor * 75;
+        }
+
+        function calculateDistanceSurcharge(distanceKm) {
+            if (distanceKm <= 10) return 0;
+            if (distanceKm <= 50) return (distanceKm - 10) * 5;
+            return 200 + (distanceKm - 50) * 8;
+        }
+
+        function calculateFragileItemsFee(numItems) {
+            if (numItems <= 0) return 0;
+            if (numItems <= 5) return numItems * 50;
+            return 250 + (numItems - 5) * 30;
+        }
+
+        function calculateDiscount(baseCost, isReturning, promoCode) {
+            let discount = 0;
+            if (isReturning) discount += baseCost * 0.10;
+            if (promoCode === 'AJMAN20') discount += baseCost * 0.20;
+            else if (promoCode === 'WELCOME10') discount += baseCost * 0.10;
+            return Math.min(discount, baseCost * 0.30);
+        }
+
+        function estimateCost(villaSize, serviceType, distanceKm, floor, hasElevator, fragileItems, isReturning, promoCode) {
+            const baseCost = BASE_RATES[villaSize];
+            const multiplier = SERVICE_MULTIPLIERS[serviceType];
+            const adjustedBase = baseCost * multiplier;
+            const distanceSurcharge = calculateDistanceSurcharge(distanceKm);
+            const floorSurcharge = calculateFloorSurcharge(floor, hasElevator);
+            const fragileFee = calculateFragileItemsFee(fragileItems);
+            const subtotal = adjustedBase + distanceSurcharge + floorSurcharge + fragileFee;
+            const discount = calculateDiscount(subtotal, isReturning, promoCode);
+            const total = subtotal - discount;
+
+            return {
+                baseCost, multiplier, distanceSurcharge,
+                floorSurcharge, fragileFee, discount, total
+            };
+        }
+
+        // Distance slider update
+        document.getElementById('distance').addEventListener('input', function() {
+            document.getElementById('distance-value').textContent = this.value;
+        });
+
+        // Form submission
+        document.getElementById('pricing-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const villaSize = document.getElementById('villa-size').value;
+            const serviceType = document.getElementById('service-type').value;
+            const distance = parseInt(document.getElementById('distance').value);
+            const floor = parseInt(document.getElementById('floor').value) || 0;
+            const hasElevator = document.getElementById('has-elevator').checked;
+            const fragileItems = parseInt(document.getElementById('fragile-items').value) || 0;
+            const isReturning = document.getElementById('returning-customer').checked;
+            const promoCode = document.getElementById('promo-code').value.trim().toUpperCase();
+
+            const result = estimateCost(villaSize, serviceType, distance, floor, hasElevator, fragileItems, isReturning, promoCode);
+
+            document.getElementById('res-base').textContent = `AED ${result.baseCost.toFixed(0)}`;
+            document.getElementById('res-multiplier').textContent = `x${result.multiplier}`;
+            document.getElementById('res-distance').textContent = `AED ${result.distanceSurcharge.toFixed(0)}`;
+            document.getElementById('res-floor').textContent = `AED ${result.floorSurcharge.toFixed(0)}`;
+            document.getElementById('res-fragile').textContent = `AED ${result.fragileFee.toFixed(0)}`;
+            document.getElementById('res-discount').textContent = `- AED ${result.discount.toFixed(0)}`;
+            document.getElementById('res-total').textContent = `AED ${result.total.toFixed(0)}`;
+
+            document.getElementById('results').classList.remove('hidden');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
