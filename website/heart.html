@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Red Heart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0d0d1a;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+        }
+
+        /* Floating emojis background */
+        .emojis-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: floatEmoji linear infinite;
+        }
+
+        @keyframes floatEmoji {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Heart container */
+        .heart-wrapper {
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+            perspective: 800px;
+        }
+
+        /* Heart shape */
+        .heart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            animation: pulse 1.2s ease-in-out infinite;
+            transition: transform 0.6s ease, filter 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .heart.opened {
+            animation: none;
+            transform: scale(1.2);
+        }
+
+        .heart-front,
+        .heart-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transition: transform 0.8s ease;
+        }
+
+        .heart-front {
+            transform: rotateY(0deg);
+        }
+
+        .heart.opened .heart-front {
+            transform: rotateY(180deg);
+        }
+
+        .heart-back {
+            transform: rotateY(-180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heart.opened .heart-back {
+            transform: rotateY(0deg);
+        }
+
+        /* Heart shape using CSS */
+        .heart-shape {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            filter: drop-shadow(0 0 25px rgba(255, 0, 50, 0.6));
+        }
+
+        .heart-shape::before,
+        .heart-shape::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            width: 100px;
+            height: 160px;
+            border-radius: 100px 100px 0 0;
+        }
+
+        .heart-shape::before {
+            left: 100px;
+            background: linear-gradient(135deg, #ff1a1a, #cc0033, #990022);
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.3), inset 5px 5px 15px rgba(255,150,150,0.2);
+        }
+
+        .heart-shape::after {
+            left: 0;
+            background: linear-gradient(225deg, #ff3333, #e60033, #aa0025);
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+            box-shadow: inset 5px -5px 15px rgba(0,0,0,0.3), inset -5px 5px 15px rgba(255,150,150,0.2);
+        }
+
+        /* Glossy overlay */
+        .gloss {
+            position: absolute;
+            top: 50px;
+            left: 55px;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.5), transparent 70%);
+            border-radius: 50%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Back face heart shape */
+        .heart-shape-back {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 80, 0.7));
+        }
+
+        .heart-shape-back::before,
+        .heart-shape-back::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            width: 100px;
+            height: 160px;
+            border-radius: 100px 100px 0 0;
+        }
+
+        .heart-shape-back::before {
+            left: 100px;
+            background: linear-gradient(135deg, #cc0044, #880022, #660018);
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart-shape-back::after {
+            left: 0;
+            background: linear-gradient(225deg, #dd0044, #990033, #770020);
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .hello-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -40%);
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 100, 150, 0.5);
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.5s ease 0.4s;
+        }
+
+        .heart.opened .hello-text {
+            opacity: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.12);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.08);
+            }
+            60% {
+                transform: scale(1);
+            }
+        }
+
+        .heart:hover:not(.opened) {
+            filter: brightness(1.1);
+        }
+
+        /* Click hint */
+        .hint {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            white-space: nowrap;
+            animation: fadeHint 2s ease-in-out infinite;
+            transition: opacity 0.3s ease;
+        }
+
+        .hint.hidden {
+            opacity: 0;
+        }
+
+        @keyframes fadeHint {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating emojis -->
+    <div class="emojis-container" id="emojis"></div>
+
+    <!-- Heart -->
+    <div class="heart-wrapper" id="heart-wrapper">
+        <div class="heart" id="heart">
+            <!-- Front face -->
+            <div class="heart-front">
+                <div class="heart-shape">
+                    <div class="gloss"></div>
+                </div>
+            </div>
+            <!-- Back face -->
+            <div class="heart-back">
+                <div class="heart-shape-back"></div>
+                <span class="hello-text">Hello</span>
+            </div>
+        </div>
+        <div class="hint" id="hint">Click the heart ❤️</div>
+    </div>
+
+    <script>
+        // Generate floating emojis
+        (function() {
+            const container = document.getElementById('emojis');
+            const emojis = ['❤️', '✨', '💫', '❤️', '✨', '💫', '💖', '⭐', '🌟'];
+            const count = 50;
+
+            for (let i = 0; i < count; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + '%';
+                emoji.style.fontSize = (Math.random() * 16 + 12) + 'px';
+                emoji.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                emoji.style.animationDelay = (Math.random() * 20) + 's';
+                container.appendChild(emoji);
+            }
+        })();
+
+        // Heart click interaction
+        let isOpened = false;
+        const heart = document.getElementById('heart');
+        const hint = document.getElementById('hint');
+
+        document.getElementById('heart-wrapper').addEventListener('click', function() {
+            if (!isOpened) {
+                heart.classList.add('opened');
+                hint.classList.add('hidden');
+                isOpened = true;
+            } else {
+                heart.classList.remove('opened');
+                hint.classList.remove('hidden');
+                isOpened = false;
+            }
+        });
+    </script>
+</body>
+</html>
