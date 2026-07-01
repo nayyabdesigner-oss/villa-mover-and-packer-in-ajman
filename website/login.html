@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Starry background */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: moveUp linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes moveUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+        /* Moon */
+        .moon {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 40% 40%, #fffde8, #ffe680, #e6c44c);
+            border-radius: 50%;
+            box-shadow:
+                0 0 40px 10px rgba(255, 230, 100, 0.3),
+                0 0 80px 30px rgba(255, 230, 100, 0.15),
+                0 0 120px 60px rgba(255, 230, 100, 0.08);
+            z-index: 1;
+            animation: floatMoon 6s ease-in-out infinite;
+        }
+
+        @keyframes floatMoon {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Login card */
+        .login-card {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 420px;
+            padding: 48px 36px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow:
+                0 8px 32px rgba(106, 90, 249, 0.15),
+                0 0 60px rgba(162, 89, 255, 0.05);
+        }
+
+        .login-card h2 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 36px;
+            letter-spacing: -0.5px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group input:focus {
+            border-color: rgba(106, 90, 249, 0.6);
+            box-shadow: 0 0 20px rgba(106, 90, 249, 0.15);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6a5af9, #a259ff);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .login-btn:hover {
+            box-shadow:
+                0 0 25px rgba(106, 90, 249, 0.5),
+                0 0 50px rgba(162, 89, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Mobile-first adjustments */
+        @media (max-width: 480px) {
+            .login-card {
+                width: 92%;
+                padding: 40px 24px;
+            }
+
+            .moon {
+                width: 80px;
+                height: 80px;
+                top: 30px;
+                right: 20px;
+            }
+
+            .login-card h2 {
+                font-size: 24px;
+                margin-bottom: 28px;
+            }
+        }
+
+        @media (min-height: 700px) and (max-width: 480px) {
+            body {
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Stars -->
+    <div class="stars-container" id="stars"></div>
+
+    <!-- Moon -->
+    <div class="moon"></div>
+
+    <!-- Login Card -->
+    <div class="login-card">
+        <h2>Welcome Back</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Generate animated stars
+        (function() {
+            const container = document.getElementById('stars');
+            const starCount = 200;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 2.5 + 0.5;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + 100 + '%';
+                star.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                star.style.animationDelay = (Math.random() * 20) + 's';
+                container.appendChild(star);
+            }
+        })();
+
+        // Form handler
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.login-btn');
+            btn.textContent = 'Logging in...';
+            setTimeout(function() {
+                btn.textContent = 'Login';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
