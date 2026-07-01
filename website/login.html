@@ -124,14 +124,33 @@
             width: 90%;
             max-width: 420px;
             padding: 48px 36px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
             box-shadow:
-                0 8px 32px rgba(106, 90, 249, 0.15),
-                0 0 60px rgba(162, 89, 255, 0.05);
+                0 8px 32px rgba(106, 90, 249, 0.2),
+                0 0 80px rgba(162, 89, 255, 0.1),
+                inset 0 0 30px rgba(106, 90, 249, 0.05);
+            animation: cardGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes cardGlow {
+            0% {
+                box-shadow:
+                    0 8px 32px rgba(106, 90, 249, 0.2),
+                    0 0 80px rgba(162, 89, 255, 0.1),
+                    inset 0 0 30px rgba(106, 90, 249, 0.05);
+            }
+            100% {
+                box-shadow:
+                    0 8px 40px rgba(106, 90, 249, 0.35),
+                    0 0 100px rgba(162, 89, 255, 0.15),
+                    inset 0 0 40px rgba(106, 90, 249, 0.08);
+            }
         }
 
         .login-card h2 {
@@ -141,6 +160,10 @@
             font-weight: 700;
             margin-bottom: 36px;
             letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .input-group {
@@ -151,12 +174,12 @@
             width: 100%;
             padding: 16px 20px;
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
             color: #ffffff;
             font-size: 15px;
             outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .input-group input::placeholder {
@@ -165,7 +188,9 @@
 
         .input-group input:focus {
             border-color: rgba(106, 90, 249, 0.6);
-            box-shadow: 0 0 20px rgba(106, 90, 249, 0.15);
+            box-shadow: 0 0 20px rgba(106, 90, 249, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.01);
         }
 
         .login-btn {
@@ -247,7 +272,7 @@
         // Generate animated stars
         (function() {
             const container = document.getElementById('stars');
-            const starCount = 600;
+            const starCount = 1000;
 
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
