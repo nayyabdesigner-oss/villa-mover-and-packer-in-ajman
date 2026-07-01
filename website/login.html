@@ -66,14 +66,46 @@
             right: 40px;
             width: 120px;
             height: 120px;
-            background: radial-gradient(circle at 40% 40%, #fffde8, #ffe680, #e6c44c);
+            background: radial-gradient(circle at 35% 35%, #f5f3e8, #e8e4d4, #d4cfc0, #b8b3a3);
             border-radius: 50%;
             box-shadow:
-                0 0 40px 10px rgba(255, 230, 100, 0.3),
-                0 0 80px 30px rgba(255, 230, 100, 0.15),
-                0 0 120px 60px rgba(255, 230, 100, 0.08);
+                0 0 40px 10px rgba(220, 215, 190, 0.25),
+                0 0 80px 30px rgba(220, 215, 190, 0.12),
+                0 0 120px 60px rgba(220, 215, 190, 0.06);
             z-index: 1;
             animation: floatMoon 6s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .moon::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 25%;
+            width: 18px;
+            height: 18px;
+            background: radial-gradient(circle, rgba(160, 155, 140, 0.5), rgba(160, 155, 140, 0.2));
+            border-radius: 50%;
+            box-shadow:
+                35px 15px 0 -2px rgba(140, 135, 120, 0.35),
+                -10px 40px 0 4px rgba(150, 145, 130, 0.3),
+                50px 50px 0 -4px rgba(140, 135, 120, 0.25),
+                20px 65px 0 1px rgba(160, 155, 140, 0.3),
+                60px 25px 0 -3px rgba(150, 145, 130, 0.2),
+                -5px 70px 0 -2px rgba(140, 135, 120, 0.25),
+                45px 75px 0 -5px rgba(150, 145, 130, 0.2);
+        }
+
+        .moon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 65% 65%, rgba(0,0,0,0.08), transparent 60%);
+            box-shadow: inset -8px -8px 20px rgba(0,0,0,0.1);
         }
 
         @keyframes floatMoon {
